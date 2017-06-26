@@ -1,0 +1,9 @@
+1.0.1: First version of Crypto
+1.0.2:
+  - Create base schema
+  - create_providers_table.php
+  - seed_providers_table.php
+  - create_currencies_table.php
+  - seed_currencies_table.php
+  - create_pairs_table.php
+  - create_pair_provider_table.php
