@@ -45,8 +45,8 @@ class SeedCurrenciesTable extends Seeder
         $cryptoList = [
             'Bitcoin' => 'BTC',
             'Litecoin' => 'LTC',
-            'Ethereum' => 'ETH',
-            'Ethereum Classic' => 'ETC',
+            'Ether' => 'ETH',
+            'Ether Classic' => 'ETC',
             'Dash' => 'DASH',
 
 //            'Ripple' => 'XRP',

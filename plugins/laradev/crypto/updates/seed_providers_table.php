@@ -73,7 +73,7 @@ class SeedProvidersTable extends Seeder
             ],
             [
                 'id' => 11,
-                'name' => 'NetExchange',
+                'name' => 'obmen.cc',
                 'type' => Provider::TYPE_EXCHANGE,
                 'active' => true,
             ],

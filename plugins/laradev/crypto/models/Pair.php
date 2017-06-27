@@ -15,12 +15,12 @@ class Pair extends Model
     /**
      * @var array Guarded fields
      */
-    protected $guarded = ['*'];
+    protected $guarded = [];
 
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'currency_from', 'currency_to', 'active'];
 
     /**
      * @var array Relations

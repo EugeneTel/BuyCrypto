@@ -6,4 +6,5 @@
   - create_currencies_table.php
   - seed_currencies_table.php
   - create_pairs_table.php
-  - create_pair_provider_table.php
+  - create_pair_providers_table.php
+  - seed_pairs_table.php

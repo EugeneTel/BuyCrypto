@@ -3,14 +3,14 @@
 use Model;
 
 /**
- * Provider Model
+ * PairProvider Model
  */
-class Provider extends Model
+class PairProvider extends Model
 {
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'laradev_crypto_providers';
+    public $table = 'laradev_crypto_pair_providers';
 
     /**
      * @var array Guarded fields
@@ -28,20 +28,10 @@ class Provider extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [];
-    public $belongsToMany = [
-        'pairs' => [
-            'Laradev\Crypto\Models\Pair',
-            'table' => 'laradev_crypto_pair_providers',
-            'pivotModel' => 'Laradev\Crypto\Models\PairProvider',
-        ]
-    ];
+    public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-
-    const TYPE_PAYMENT = 1;
-    const TYPE_EXCHANGE = 2;
-    const TYPE_TRADE = 3;
 }
