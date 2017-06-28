@@ -1,5 +1,6 @@
 <?php namespace Laradev\Crypto\Updates;
 
+use Illuminate\Support\Facades\DB;
 use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;

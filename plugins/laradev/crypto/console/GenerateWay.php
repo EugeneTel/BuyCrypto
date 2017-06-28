@@ -57,16 +57,16 @@ class GenerateWay extends Command
                     foreach ($wayList as $way) {
 
                         try {
-                            Db::beginTransaction();
+                            DB::beginTransaction();
 
                             $this->createWay($way, $curFrom, $curTo);
 
-                            Db::commit();
+                            DB::commit();
 
                         } catch (\Exception $e) {
                             Log::error('Create way error. (' . $curFrom->name . '=>' . $curTo->name . ') ' . $e->getMessage());
 
-                            Db::rollBack();
+                            DB::rollBack();
                         }
 
                     }
