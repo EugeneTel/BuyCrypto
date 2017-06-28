@@ -8,3 +8,7 @@
   - create_pairs_table.php
   - create_pair_providers_table.php
   - seed_pairs_table.php
+1.0.3:
+  - Generate and save ways
+  - create_ways_table.php
+  - create_steps_table.php

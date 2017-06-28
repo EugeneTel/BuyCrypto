@@ -3,9 +3,11 @@
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Laradev\Crypto\Models\Currency;
 use Laradev\Crypto\Models\Pair;
 use Laradev\Crypto\Models\Provider;
+use Laradev\Crypto\Models\Way;
 
 class GenerateWay extends Command
 {
@@ -36,32 +38,87 @@ class GenerateWay extends Command
 
         $curFromList = Currency::whereActive(true)
             ->whereType(Currency::TYPE_FIAT)
-//            ->whereName('Payeer EUR')
+//            ->whereName('WMZ')
             ->get();
 
         $curToList = Currency::whereActive(true)
             ->whereType(Currency::TYPE_CRYPTO)
-//            ->whereName('Dash')
+//            ->whereName('Bitcoin')
             ->get();
 
         foreach ($curFromList as $curFrom) {
 
             foreach ($curToList as $curTo) {
 
-                if (!$curFrom || !$curTo) {
-                    throw new \Exception('Wrong from currency!');
+                try {
+                    $wayList = $this->generateWayList($curFrom, $curTo);
+
+                    // create ways
+                    foreach ($wayList as $way) {
+
+                        try {
+                            Db::beginTransaction();
+
+                            $this->createWay($way, $curFrom, $curTo);
+
+                            Db::commit();
+
+                        } catch (\Exception $e) {
+                            Log::error('Create way error. (' . $curFrom->name . '=>' . $curTo->name . ') ' . $e->getMessage());
+
+                            Db::rollBack();
+                        }
+
+                    }
+
+                    $this->output->writeln($curFrom->name . ' => ' . $curTo->name . ' | Ways count: ' . count($wayList));
+
+                } catch (\Exception $e) {
+                    Log::error('Generate way error. (' . $curFrom->name . '=>' . $curTo->name . ') ' . $e->getMessage());
                 }
 
-                $wayList = $this->generate($curFrom, $curTo);
-
-                $this->output->writeln($curFrom->name. ' => ' . $curTo->name . ' | Ways count: ' . count($wayList));
             }
 
         }
 
     }
 
-    protected function generate(Currency $currencyFrom, Currency $currencyTo)
+
+
+    protected function createWay(array $stepList, Currency $curFrom, Currency $curTo)
+    {
+        $hash = md5(implode('|', $stepList));
+
+        // check if a way already exist
+        $way = Way::whereHash($hash)->first();
+
+        if ($way) {
+            return $way;
+        }
+
+        // create new way
+        $way = new Way;
+        $way->hash = $hash;
+        $way->currency_from = $curFrom->id;
+        $way->currency_to = $curTo->id;
+        $way->save();
+
+        // add steps for way
+        $stepOrder = 0;
+        foreach ($stepList as $pairName) {
+            $pair = Pair::whereName($pairName)->firstOrFail();
+
+            $way->steps()->create([
+                'pair_id' => $pair->id,
+                'order' => $stepOrder,
+            ]);
+            $stepOrder++;
+        }
+
+        return $way;
+    }
+
+    protected function generateWayList(Currency $currencyFrom, Currency $currencyTo)
     {
         $this->currencyFrom = $currencyFrom;
         $this->currencyTo = $currencyTo;
