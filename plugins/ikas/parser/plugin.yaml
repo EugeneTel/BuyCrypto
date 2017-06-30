@@ -1,0 +1,11 @@
+plugin:
+    name: 'ikas.parser::lang.plugin.name'
+    description: 'ikas.parser::lang.plugin.description'
+    author: iKas
+    icon: oc-icon-exchange
+    homepage: ''
+navigation:
+    parser:
+        label: Parser
+        url: ikas/parser/parsercurrencycodecontroller
+        icon: icon-exchange
