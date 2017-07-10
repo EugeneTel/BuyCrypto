@@ -9,3 +9,8 @@ navigation:
         label: Parser
         url: ikas/parser/parsercurrencycodecontroller
         icon: icon-exchange
+        sideMenu:
+            associations:
+                label: Associations
+                url: ikas/parser/parsercurrencycodecontroller
+                icon: icon-rotate-left
