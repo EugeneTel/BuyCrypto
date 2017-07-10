@@ -3,12 +3,14 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 use Ikas\Parser\Models\CryptowatchData;
+use Illuminate\Support\Facades\Log;
 
 class CryptowatchController extends Controller
 {
     public $implement = ['Backend\Behaviors\ListController','Backend\Behaviors\ReorderController'];
     
     public $listConfig = 'config_list.yaml';
+    public $formConfig = 'config_form.yaml';
     public $reorderConfig = 'config_reorder.yaml';
 
     public $parsePageUrl = 'https://api.cryptowat.ch/markets/prices';
@@ -48,16 +50,20 @@ class CryptowatchController extends Controller
 
     public function saveData($data){
         foreach ($data as $item){
-            $findRow = CryptowatchData::where('exchange', $item['exchange'])->where('currency_pair', $item['currency_pair']);
-            if(empty($findRow->get()->toArray())){
-                $cryptowatch = new CryptowatchData();
-                $cryptowatch->exchange = $item['exchange'];
-                $cryptowatch->currency_pair = $item['currency_pair'];
-                $cryptowatch->price = $item['price'];
-                $cryptowatch->save();
-            } else {
-                $findRow->update(['price' => $item['price']]);
-            };
+            try{
+                $findRow = CryptowatchData::where('exchange', $item['exchange'])->where('currency_pair', $item['currency_pair']);
+                if(empty($findRow->get()->toArray())){
+                    $cryptowatch = new CryptowatchData();
+                    $cryptowatch->exchange = $item['exchange'];
+                    $cryptowatch->currency_pair = $item['currency_pair'];
+                    $cryptowatch->price = $item['price'];
+                    $cryptowatch->save();
+                } else {
+                    $findRow->update(['price' => $item['price']]);
+                };
+            } catch (\Exception $e){
+                Log::error($e);
+            }
         }
     }
 

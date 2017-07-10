@@ -1,6 +1,7 @@
-list: $/ikas/parser/models/parsercurencycode/columns.yaml
-modelClass: Ikas\Parser\Models\ParserCurencyCode
 title: ParserCurrencyCodeController
+modelClass: Ikas\Parser\Models\ParserCurencyCode
+list: $/ikas/parser/models/parsercurencycode/columns.yaml
+recordUrl: 'ikas/parser/parsercurrencycodecontroller/update/:id'
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
 showCheckboxes: true
@@ -8,4 +9,3 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'ikas/parser/parsercurrencycodecontroller/update/:id'

@@ -1,0 +1,10 @@
+name: CryptowatchController
+modelClass: Ikas\Parser\Models\CryptowatchData
+form: $/ikas/parser/models/cryptowatchcontroller/fields.yaml
+defaultRedirect: ikas/parser/cryptowatchcontroller
+create:
+    redirect: 'ikas/parser/cryptowatchcontroller/update/:id'
+    redirectClose: ikas/parser/cryptowatchcontroller
+update:
+    redirect: ikas/parser/cryptowatchcontroller
+    redirectClose: ikas/parser/cryptowatchcontroller

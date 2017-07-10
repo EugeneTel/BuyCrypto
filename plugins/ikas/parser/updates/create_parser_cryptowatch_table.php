@@ -15,6 +15,8 @@ class CreateParserCryptowatchTable extends Migration
             $table->string('exchange', 20);
             $table->string('currency_pair', 30);
             $table->string('price');
+            $table->integer('providers_id')->references('id')->on('laradev_crypto_providers')->nullable();
+            $table->integer('pairs_id')->references('id')->on('laradev_crypto_providers')->nullable();
         });
     }
 

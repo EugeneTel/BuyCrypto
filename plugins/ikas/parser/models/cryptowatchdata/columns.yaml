@@ -3,7 +3,7 @@ columns:
         label: ID
         type: text
     exchange:
-        label: Exchange
+        label: Provider
         type: text
     currency_pair:
         label: Pair

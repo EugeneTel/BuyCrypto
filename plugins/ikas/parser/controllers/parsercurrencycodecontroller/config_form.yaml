@@ -1,6 +1,6 @@
 name: ParserCurrencyCodeController
-form: $/ikas/parser/models/parsercurencycode/fields.yaml
 modelClass: Ikas\Parser\Models\ParserCurencyCode
+form: $/ikas/parser/models/parsercurencycode/fields.yaml
 defaultRedirect: ikas/parser/parsercurrencycodecontroller
 create:
     redirect: 'ikas/parser/parsercurrencycodecontroller/update/:id'
