@@ -1,5 +1,7 @@
 <?php namespace Ikas\Parser\Models;
 
+use Laradev\Crypto\Models\Pair;
+use Laradev\Crypto\Models\Provider;
 use Model;
 
 /**
@@ -25,4 +27,15 @@ class CryptowatchData extends Model
      * @var string The database table used by the model.
      */
     public $table = 'ikas_parser_cryptowatch';
+
+    public function getProvidersIdOptions(){
+        $providers = Provider::all()->pluck('name', 'id')->toArray();
+        return $providers;
+    }
+
+    public function getPairsIdOptions(){
+        $pairs = Pair::all()->pluck('name', 'id')->toArray();
+        return $pairs;
+    }
+
 }

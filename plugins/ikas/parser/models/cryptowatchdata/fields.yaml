@@ -11,3 +11,11 @@ fields:
         span: auto
         disabled: 1
         type: text
+    providers_id:
+        label: 'Provider'
+        type: dropdown
+        span: left
+    pairs_id:
+        label: 'Pairs'
+        type: dropdown
+        span: right
