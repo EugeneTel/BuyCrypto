@@ -1,0 +1,4 @@
+title: ParserCurrencyCodeController
+modelClass: Ikas\Parser\Models\ParserCurencyCode
+toolbar:
+    buttons: reorder_toolbar
