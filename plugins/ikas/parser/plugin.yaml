@@ -14,3 +14,7 @@ navigation:
                 label: Associations
                 url: ikas/parser/parsercurrencycodecontroller
                 icon: icon-rotate-left
+            cryptowatch-data:
+                label: 'Cryptowatch table'
+                url: ikas/parser/cryptowatchcontroller
+                icon: icon-table

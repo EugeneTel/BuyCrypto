@@ -3,3 +3,6 @@
 1.0.2:
     - Create table [ ikas_parser_currency_code ]
     - create_parser_currency_code_table.php
+1.0.3:
+    - Create table [ ikas_parser_cryptowatch ]
+    - create_parser_cryptowatch_table.php

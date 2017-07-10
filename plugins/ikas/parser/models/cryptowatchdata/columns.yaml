@@ -1,0 +1,13 @@
+columns:
+    id:
+        label: ID
+        type: text
+    exchange:
+        label: Exchange
+        type: text
+    currency_pair:
+        label: Pair
+        type: text
+    price:
+        label: Price
+        type: text
