@@ -18,3 +18,7 @@ navigation:
                 label: 'Cryptowatch table'
                 url: ikas/parser/cryptowatchcontroller
                 icon: icon-table
+            bestchange:
+                label: Bestchange
+                url: ikas/parser/bestchangecontroller
+                icon: icon-table

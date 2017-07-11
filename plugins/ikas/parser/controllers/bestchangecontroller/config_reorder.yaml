@@ -1,0 +1,4 @@
+title: BestchangeController
+modelClass: Ikas\Parser\Models\Bestchange
+toolbar:
+    buttons: reorder_toolbar

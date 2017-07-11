@@ -1,0 +1,10 @@
+name: BestchangeController
+form: $/ikas/parser/models/bestchange/fields.yaml
+modelClass: Ikas\Parser\Models\Bestchange
+defaultRedirect: ikas/parser/bestchangecontroller
+create:
+    redirect: 'ikas/parser/bestchangecontroller/update/:id'
+    redirectClose: ikas/parser/bestchangecontroller
+update:
+    redirect: ikas/parser/bestchangecontroller
+    redirectClose: ikas/parser/bestchangecontroller

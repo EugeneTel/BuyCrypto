@@ -6,3 +6,6 @@
 1.0.3:
     - Create table [ ikas_parser_cryptowatch ]
     - create_parser_cryptowatch_table.php
+1.0.4:
+    - Create table [ ikas_parser_bestchange ]
+    - create_parser_bestchange_table.php
