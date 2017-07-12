@@ -5,3 +5,6 @@ columns:
     value:
         label: Value
         type: text
+    default:
+        label: 'Default value'
+        type: text

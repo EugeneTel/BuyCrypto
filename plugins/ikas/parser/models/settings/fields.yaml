@@ -7,5 +7,11 @@ fields:
     value:
         label: Value
         oc.commentPosition: ''
-        span: auto
+        span: full
+        type: text
+    default:
+        label: 'Default value'
+        oc.commentPosition: ''
+        span: full
+        disabled: 1
         type: text

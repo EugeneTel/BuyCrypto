@@ -6,7 +6,11 @@ use Ikas\Parser\Models\Settings as SettingsModel;
 
 class Settings extends Controller
 {
-    public $implement = ['Backend\Behaviors\ListController','Backend\Behaviors\FormController','Backend\Behaviors\ReorderController'];
+    public $implement = [
+        'Backend\Behaviors\ListController',
+        'Backend\Behaviors\FormController',
+        'Backend\Behaviors\ReorderController'
+    ];
     
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
@@ -23,10 +27,21 @@ class Settings extends Controller
      * @param null $name
      * @return mixed
      */
-    static function get($name = null){
-        if ($name){
+    static function get($name = null)
+    {
+        if ($name) {
             $setting = SettingsModel::where('name', $name)->first();
-            return $setting->value;
+            if (!is_object($setting)) {
+                \Flash::error('No setting [ ' . $name . ' ] in table');
+                return false;
+            }
+
+            if(empty($value = $setting->value)){
+                $value = $setting->default;
+            }
+
+            return $value;
+
         } else {
             $settings = SettingsModel::get();
             return $settings->pluck('value', 'name')->toArray();

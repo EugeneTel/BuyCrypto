@@ -2,7 +2,6 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
-use Ikas\Parser\Models\Settings as SettingsModel;
 use Illuminate\Support\Facades\Log;
 
 class BestchangeController extends Controller
@@ -13,6 +12,8 @@ class BestchangeController extends Controller
     public $formConfig = 'config_form.yaml';
     public $reorderConfig = 'config_reorder.yaml';
 
+    public $fileDirUnzip;
+
     public function __construct()
     {
         parent::__construct();
@@ -20,39 +21,57 @@ class BestchangeController extends Controller
     }
 
     public function parseStart(){
-        $this->unzipDir();
+        if($this->unzipDir()){
+            $contents = $this->readFile();
+        };
+
     }
 
     public function unzipDir(){
 
         try{
 
+            $fileSource = Settings::get('bestchange.file_dir.source.info');
             $fileDir = Settings::get('bestchange.file_dir.info');
-            $fileDirUnzip = Settings::get('bestchange.file_dir.unzip.info');
+            $this->fileDirUnzip = Settings::get('bestchange.file_dir.unzip.info');
+
+            copy($fileSource, $fileDir);
 
             if (file_exists($fileDir)){
                 $zip = new \ZipArchive();
                 $zip->open($fileDir);
 
-                if (!file_exists($fileDirUnzip)){
-                    mkdir($fileDirUnzip);
-                    chmod($fileDirUnzip, 0777);
+                if (!file_exists($this->fileDirUnzip)){
+                    mkdir($this->fileDirUnzip);
+                    chmod($this->fileDirUnzip, 0777);
                 }
 
-                $zip->extractTo($fileDirUnzip);
+                $zip->extractTo($this->fileDirUnzip);
                 $zip->close();
 
-                $files = scandir($fileDirUnzip);
-                
+                $files = scandir($this->fileDirUnzip);
+
                 foreach ($files as $file){
                     if ($file != '.' and $file != '..'){
-                        chmod($fileDirUnzip . $file, 0777);
+                        chmod($this->fileDirUnzip . $file, 0777);
                     }
                 }
             }
         } catch (\Exception $e){
             \Flash::error('Unzip file error:' . $e->getMessage());
             Log::error($e);
+            return false;
+        }
+        return true;
+    }
+
+    public function readFile(){
+
+        $files = Settings::get('bestchange.file_list.parse');
+
+        if (!$files){
+            \Flash::error('No selected files');
+            return false;
         }
 
     }
