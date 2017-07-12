@@ -2,6 +2,8 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Ikas\Parser\Models\Settings as SettingsModel;
+use Illuminate\Support\Facades\Log;
 
 class BestchangeController extends Controller
 {
@@ -18,9 +20,41 @@ class BestchangeController extends Controller
     }
 
     public function parseStart(){
-        $zip = new \ZipArchive();
-        $zip->open('storage/temp/public/info.zip');
-        $zip->extractTo('storage/temp/public/exchange/');
-        $zip->close();
+        $this->unzipDir();
     }
+
+    public function unzipDir(){
+
+        try{
+
+            $fileDir = Settings::get('bestchange.file_dir.info');
+            $fileDirUnzip = Settings::get('bestchange.file_dir.unzip.info');
+
+            if (file_exists($fileDir)){
+                $zip = new \ZipArchive();
+                $zip->open($fileDir);
+
+                if (!file_exists($fileDirUnzip)){
+                    mkdir($fileDirUnzip);
+                    chmod($fileDirUnzip, 0777);
+                }
+
+                $zip->extractTo($fileDirUnzip);
+                $zip->close();
+
+                $files = scandir($fileDirUnzip);
+                
+                foreach ($files as $file){
+                    if ($file != '.' and $file != '..'){
+                        chmod($fileDirUnzip . $file, 0777);
+                    }
+                }
+            }
+        } catch (\Exception $e){
+            \Flash::error('Unzip file error:' . $e->getMessage());
+            Log::error($e);
+        }
+
+    }
+
 }

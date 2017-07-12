@@ -9,3 +9,7 @@
 1.0.4:
     - Create table [ ikas_parser_bestchange ]
     - create_parser_bestchange_table.php
+1.0.5:
+    - Create table [ ikas_parser_settings ]
+    - create_parser_settings_table.php
+    - seed_settings_table.php

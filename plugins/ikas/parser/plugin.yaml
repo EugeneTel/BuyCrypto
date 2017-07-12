@@ -22,3 +22,7 @@ navigation:
                 label: Bestchange
                 url: ikas/parser/bestchangecontroller
                 icon: icon-table
+            settings:
+                label: Settings
+                url: ikas/parser/settings
+                icon: icon-gears

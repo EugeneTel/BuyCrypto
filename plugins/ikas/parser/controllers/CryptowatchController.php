@@ -30,7 +30,8 @@ class CryptowatchController extends Controller
                 $this->saveData($prepareData);
             }
         } catch (\Exception $e){
-            dd($e->getMessage());
+            \Flash::error($e->getMessage());
+            Log::error($e);
         }
         return redirect()->back();
     }
