@@ -253,9 +253,17 @@ class BestchangeController extends Controller
 
     }
 
-    public function paginate(){
+    public function index(){
         $pagination = Bestchange::paginate(15);
+        $data = $pagination->toArray()['data'];
+        foreach ($data as $key => $row){
+            $data[$key]['from'] = BchCurrency::find($row['from'])->name;
+            $data[$key]['to'] = BchCurrency::find($row['to'])->name;
+            $data[$key]['bch_exchanges_id'] = BchExchange::find($row['bch_exchanges_id'])->name;
+        }
+
         $this->vars['paginate'] = $pagination->toArray();
+        $this->vars['paginate']['data'] = $data;
         $this->vars['paginate']['first_page_url'] = $pagination->url(1);
         $this->vars['paginate']['last_page_url'] = $pagination->url($pagination->lastPage());
     }

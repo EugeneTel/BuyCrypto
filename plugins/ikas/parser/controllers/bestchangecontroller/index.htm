@@ -5,7 +5,40 @@
                 <a class="btn btn-primary icon-stack-overflow" href="<?= Backend::url('ikas/parser/bestchangecontroller/parseStart') ?>">
                     Parse
                 </a>
+
+                <a class="btn btn-default" href="<?=$vars['paginate']['first_page_url']?>">First</a>
+                <a class="btn btn-default" href="<?=$vars['paginate']['prev_page_url']?>">Prev</a>
+                <strong class="btn text-info"><?=$vars['paginate']['current_page']?></strong>
+                <a class="btn btn-default" href="<?=$vars['paginate']['next_page_url']?>">Next</a>
+                <a class="btn btn-default" href="<?=$vars['paginate']['last_page_url']?>">Last</a>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="list-widget list-scrollable-container" id="Lists">
+    <div class="control-list list-scrollable" data-control="listwidget">
+        <table class="table data" data-control="rowlink">
+            <thead>
+            <th class="active list-cell-name-id list-cell-type-text"><a>ID</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>From</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>To</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>Exchange</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>Amount</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>From rate</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>To rate</a></th>
+            </thead>
+            <tbody>
+            <?php
+                    foreach($vars['paginate']['data'] as $row){
+                        echo '<tr class="rowlink">';
+            foreach($row as $k => $val){
+            echo "<td class='list-cell-index-1 list-cell-name-id list-cell-type-text'>$val</td>";
+            }
+            echo '</tr>';
+            }
+            ?>
+            </tbody>
+        </table>
     </div>
 </div>
