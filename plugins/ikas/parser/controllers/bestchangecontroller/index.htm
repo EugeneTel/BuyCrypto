@@ -2,7 +2,8 @@
     <div data-control="toolbar">
         <div class="control-toolbar">
             <div class="toolbar-item toolbar-primary">
-                <a class="btn btn-primary icon-stack-overflow" href="<?= Backend::url('ikas/parser/bestchangecontroller/parseStart') ?>">Parse</a>
+                <a class="btn btn-primary icon-stack-overflow"
+                   href="<?= Backend::url('ikas/parser/bestchangecontroller/parseStart') ?>">Parse</a>
                 <div class="pull-right">
                     <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['first_page_url']?>">First</a>
                     <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['prev_page_url']?>">Prev</a>
@@ -29,13 +30,13 @@
             </thead>
             <tbody>
             <?php
-                    foreach($vars['paginate']['data'] as $row){
-                        echo '<tr class="rowlink">';
-            foreach($row as $k => $val){
-            echo "<td class='list-cell-index-1 list-cell-name-id list-cell-type-text'>$val</td>";
-            }
-            echo '</tr>';
-            }
+                foreach($vars['paginate']['data'] as $row){
+                    echo '<tr class="rowlink">';
+                    foreach($row as $k => $val){
+                        echo "<td class='list-cell-index-1 list-cell-name-id list-cell-type-text'>$val</td>";
+                    }
+                    echo '</tr>';
+                }
             ?>
             </tbody>
         </table>
