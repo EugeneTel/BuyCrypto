@@ -2,8 +2,10 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
-use Ikas\Parser\Models\BCHCurrency;
-use Ikas\Parser\Models\BCHCurrencyCode;
+use Ikas\Parser\Models\BchCurrency;
+use Ikas\Parser\Models\BchCurrencyCode;
+use Ikas\Parser\Models\BchExchange;
+use Ikas\Parser\Models\Bestchange;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use October\Rain\Support\Facades\Flash;
@@ -127,6 +129,13 @@ class BestchangeController extends Controller
         if (in_array('bm_cy.dat', $this->files)){
             $this->saveCurrency($data);
         }
+
+        if (in_array('bm_exch.dat', $this->files)){
+            $this->saveExchange($data);
+        }
+        if (in_array('bm_rates.dat', $this->files)){
+            $this->saveBestchange($data);
+        }
     }
 
     public function saveCurrencyCode($data = []){
@@ -138,8 +147,8 @@ class BestchangeController extends Controller
         }
 
         foreach ($contents as $row){
-            if(empty($code = BCHCurrencyCode::find($row[0]))){
-                $code = new BCHCurrencyCode();
+            if(empty($code = BchCurrencyCode::find($row[0]))){
+                $code = new BchCurrencyCode();
                 $code->id = $row[0];
                 $code->code = $row[1];
                 $code->name = $row[2];
@@ -162,8 +171,8 @@ class BestchangeController extends Controller
         }
 
         foreach ($contents as $row){
-            if(empty($money = BCHCurrency::find($row[0]))){
-                $money = new BCHCurrency();
+            if(empty($money = BchCurrency::find($row[0]))){
+                $money = new BchCurrency();
                 $money->id = $row[0];
                 $money->x1 = $row[1];
                 $money->name = $row[2];
@@ -180,6 +189,76 @@ class BestchangeController extends Controller
                 ]);
             };
         }
+    }
+
+    public function saveExchange($data = []){
+
+        $contents = $data['bm_exch.dat'];
+
+        if(empty($contents)){
+            return false;
+        }
+
+        foreach ($contents as $row){
+            try{
+                if(empty($exch = BchExchange::find($row[0]))){
+                    $exch = new BchExchange();
+                    $exch->id = $row[0];
+                    $exch->name = $row[1];
+                    $exch->save();
+                } else {
+                    $exch->update([
+                        'name' => $row[1]
+                    ]);
+                };
+            } catch (\Exception $e){
+                Log::error($e);
+            }
+
+        }
+
+    }
+
+    public function saveBestchange($data = []){
+
+        $contents = $data['bm_rates.dat'];
+
+        if(empty($contents)){
+            return false;
+        }
+        set_time_limit(600);
+        foreach ($contents as $row){
+            $bch = Bestchange::where('from', $row[0])->where('to', $row[1])->where('bch_exchanges_id', $row[2]);
+            if(empty($bch->get()->toArray())){
+                $bch = new Bestchange();
+                $bch->from = $row[0];
+                $bch->to = $row[1];
+                $bch->bch_exchanges_id = $row[2];
+                $bch->amount = $row[3];
+                $bch->from_rate = $row[4];
+                $bch->to_rate = $row[5];
+                $bch->save();
+            } else {
+                $bch->update([
+                    'from' => $row[0],
+                    'to' => $row[1],
+                    'bch_exchanges_id' => $row[2],
+                    'amount' => $row[3],
+                    'from_rate' => $row[4],
+                    'to_rate' => $row[5],
+                ]);
+            };
+        }
+        set_time_limit(30);
+
+    }
+
+    public function paginate($page){
+
+        $pagination = Bestchange::paginate(15, $page);
+
+
+        $this->vars['paginate'] = $pagination->toArray();
     }
 
 }

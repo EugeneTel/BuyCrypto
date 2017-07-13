@@ -5,7 +5,7 @@ use Model;
 /**
  * BCHMoneyCode Model
  */
-class BCHCurrencyCode extends Model
+class BchCurrencyCode extends Model
 {
     public $timestamps = false;
 

@@ -3,9 +3,9 @@
 use Model;
 
 /**
- * BCHMoney Model
+ * bchExchenge Model
  */
-class BCHCurrency extends Model
+class BchExchange extends Model
 {
 
     public $timestamps = false;
@@ -13,7 +13,7 @@ class BCHCurrency extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'ikas_parser_bch_currency';
+    public $table = 'ikas_parser_bch_exchanges';
 
     /**
      * @var array Guarded fields
@@ -23,7 +23,7 @@ class BCHCurrency extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['name'];
 
     /**
      * @var array Relations

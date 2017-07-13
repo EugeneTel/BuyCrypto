@@ -12,6 +12,12 @@ class CreateParserBestchangeTable extends Migration
         Schema::create('ikas_parser_bestchange', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('from')->references('id')->on('ikas_parser_bch_currency')->nullable();
+            $table->integer('to')->references('id')->on('ikas_parser_bch_currency')->nullable();
+            $table->integer('bch_exchanges_id')->references('id')->on('ikas_parser_bch_exchanges')->nullable();
+            $table->double('amount');
+            $table->double('from_rate');
+            $table->double('to_rate');
         });
     }
 

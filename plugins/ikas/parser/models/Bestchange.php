@@ -8,7 +8,7 @@ use Model;
 class Bestchange extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    
+
     /*
      * Disable timestamps by default.
      * Remove this line if timestamps are defined in the database table.
@@ -25,4 +25,5 @@ class Bestchange extends Model
      * @var string The database table used by the model.
      */
     public $table = 'ikas_parser_bestchange';
+
 }
