@@ -10,6 +10,7 @@
     - Create table [ ikas_parser_bestchange ]
     - create_parser_bestchange_table.php
 1.0.5:
-    - Create table [ ikas_parser_settings ]
+    - Create tables for BCH parser
     - create_parser_settings_table.php
     - seed_settings_table.php
+    - create_bch_money_codes_table.php

@@ -26,8 +26,8 @@ class SeedCurrencyCodeTable extends Seeder
             ],
             [
                 'name' => 'bestchange.file_list.parse',
-                'value' => 'bm_bcodes.dat|bm_brates.dat|bm_cy.dat|bm_exch.dat|bm_info.dat|bm_news.dat|bm_rates.dat|bm_top.dat',
-                'default' => 'bm_bcodes.dat|bm_brates.dat|bm_cy.dat|bm_exch.dat|bm_info.dat|bm_news.dat|bm_rates.dat|bm_top.dat'
+                'value' => 'bm_bcodes.dat|bm_cy.dat|bm_exch.dat|bm_rates.dat',
+                'default' => 'bm_bcodes.dat|bm_brates.dat|bm_cy.dat|bm_exch.dat|bm_rates.dat|bm_top.dat'
             ],
         ]);
     }
