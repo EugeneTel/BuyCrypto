@@ -3,14 +3,17 @@
 use Model;
 
 /**
- * BCHMoneyCode Model
+ * BCHMoney Model
  */
-class BCHMoneyCode extends Model
+class BCHCurrency extends Model
 {
+
+    public $timestamps = false;
+
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'ikas_parser_bch_money_codes';
+    public $table = 'ikas_parser_bch_currency';
 
     /**
      * @var array Guarded fields

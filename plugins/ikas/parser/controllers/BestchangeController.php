@@ -2,6 +2,8 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Ikas\Parser\Models\BCHCurrency;
+use Ikas\Parser\Models\BCHCurrencyCode;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use October\Rain\Support\Facades\Flash;
@@ -19,6 +21,7 @@ class BestchangeController extends Controller
     public $reorderConfig = 'config_reorder.yaml';
 
     public $fileDirUnzip;
+    public $files;
 
     public function __construct()
     {
@@ -78,17 +81,17 @@ class BestchangeController extends Controller
     public function readFile()
     {
 
-        $files = Settings::get('bestchange.file_list.parse');
+        $this->files = Settings::get('bestchange.file_list.parse');
 
-        if (!$files) {
+        if (!$this->files) {
             \Flash::error('No selected files');
             return false;
         }
 
         $contents = [];
 
-        $files = explode('|', $files);
-        foreach ($files as $file) {
+        $this->files = explode('|', $this->files);
+        foreach ($this->files as $file) {
             try {
                 if (file_exists($this->fileDirUnzip . $file)) {
                     $contents[$file] = iconv('windows-1251',
@@ -117,12 +120,66 @@ class BestchangeController extends Controller
             return false;
         }
 
-        $this->saveCurrencyCode($data);
+        if (in_array('bm_bcodes.dat', $this->files)){
+            $this->saveCurrencyCode($data);
+        }
 
+        if (in_array('bm_cy.dat', $this->files)){
+            $this->saveCurrency($data);
+        }
     }
 
     public function saveCurrencyCode($data = []){
+
         $contents = $data['bm_bcodes.dat'];
+
+        if(empty($contents)){
+            return false;
+        }
+
+        foreach ($contents as $row){
+            if(empty($code = BCHCurrencyCode::find($row[0]))){
+                $code = new BCHCurrencyCode();
+                $code->id = $row[0];
+                $code->code = $row[1];
+                $code->name = $row[2];
+                $code->save();
+            } else {
+                $code->update([
+                    'code' => $row[1],
+                    'name' => $row[2]
+                ]);
+            };
+        }
+    }
+
+    public function saveCurrency($data = []){
+
+        $contents = $data['bm_cy.dat'];
+
+        if(empty($contents)){
+            return false;
+        }
+
+        foreach ($contents as $row){
+            if(empty($money = BCHCurrency::find($row[0]))){
+                $money = new BCHCurrency();
+                $money->id = $row[0];
+                $money->x1 = $row[1];
+                $money->name = $row[2];
+                $money->code = $row[3];
+                $money->bch_currency_codes_id = $row[4];
+                $money->save();
+            } else {
+                $money->update([
+                    'id' => $row[0],
+                    'x1' => $row[1],
+                    'name' => $row[2],
+                    'code' => $row[3],
+                    'bch_currency_codes_id' => $row[4],
+                ]);
+            };
+        }
     }
 
 }
