@@ -253,12 +253,11 @@ class BestchangeController extends Controller
 
     }
 
-    public function paginate($page){
-
-        $pagination = Bestchange::paginate(15, $page);
-
-
+    public function paginate(){
+        $pagination = Bestchange::paginate(15);
         $this->vars['paginate'] = $pagination->toArray();
+        $this->vars['paginate']['first_page_url'] = $pagination->url(1);
+        $this->vars['paginate']['last_page_url'] = $pagination->url($pagination->lastPage());
     }
 
 }
