@@ -4,11 +4,11 @@ use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreateBCHMoneysTable extends Migration
+class CreateBCHCurrenciesTable extends Migration
 {
     public function up()
     {
-        Schema::create('ikas_parser_bch_currency', function(Blueprint $table) {
+        Schema::create('ikas_parser_bch_currencies', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->integer('id')->unique();
             $table->integer('x1');
@@ -20,6 +20,6 @@ class CreateBCHMoneysTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('ikas_parser_bch_currency');
+        Schema::dropIfExists('ikas_parser_bch_currencies');
     }
 }
