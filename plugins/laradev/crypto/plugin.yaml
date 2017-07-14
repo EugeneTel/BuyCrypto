@@ -1,0 +1,11 @@
+plugin:
+    name: 'laradev.crypto::lang.plugin.name'
+    description: 'laradev.crypto::lang.plugin.description'
+    author: Laradev
+    icon: oc-icon-bitcoin
+    homepage: ''
+navigation:
+    crypto:
+        label: Crypto
+        url: /
+        icon: icon-bitcoin
