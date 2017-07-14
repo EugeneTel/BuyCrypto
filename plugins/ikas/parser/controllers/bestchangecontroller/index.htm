@@ -2,6 +2,16 @@
     <div data-control="toolbar">
         <div class="control-toolbar">
             <div class="toolbar-item toolbar-primary">
+
+                <a class="btn btn-primary icon-stack-overflow parse">Parse</a>
+
+                <div id="result" style="font-size: 20px" value = "0">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% Complete</span>
+                        </div>
+                    </div>
+                </div>
                 <a class="btn btn-primary icon-stack-overflow"
                    href="<?= Backend::url('ikas/parser/bestchangecontroller/parseStart') ?>">Parse</a>
                 <div class="pull-right">
@@ -42,3 +52,25 @@
         </table>
     </div>
 </div>
+
+<script>
+    $('.parse').click(function () {
+        console.log('run');
+        parse();
+    });
+
+    function parse() {
+        $.get(
+                "/backend/ikas/parser/bestchangecontroller/parseStart",
+                {
+                    point: $('#result').attr('value')
+                }
+        ).done(function(data) {
+            $('#result').attr('value', data);
+            $('.progress').html('<div class="progress-bar" role="progressbar" aria-valuenow="'+data+'" aria-valuemin="0" aria-valuemax="100" style="width: '+data+'%;"> <span class="sr-only">'+data+'% Complete</span> </div>');
+            if ($('#result').attr('value') < 100){
+                parse();
+            } else {console.log('done')}
+        });
+    }
+</script>

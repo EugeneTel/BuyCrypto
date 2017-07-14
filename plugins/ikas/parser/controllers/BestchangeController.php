@@ -7,6 +7,7 @@ use Ikas\Parser\Models\BchCurrencyCode;
 use Ikas\Parser\Models\BchExchange;
 use Ikas\Parser\Models\Bestchange;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use October\Rain\Support\Facades\Flash;
 
@@ -33,14 +34,18 @@ class BestchangeController extends Controller
 
     public function parseStart()
     {
-
         if ($this->unzipDir()) {
             $contents = $this->readFile();
-            $this->saveData($contents);
+
+            $point = Input::get('point');
+
+            if ($point <= 100){
+                echo $point = $point + 1;
+            }
+
+            //$this->saveData($contents);
         };
-
-        return redirect()->back();
-
+        die();
     }
 
     public function unzipDir()
@@ -252,7 +257,6 @@ class BestchangeController extends Controller
             };
         }
         set_time_limit(30);
-
     }
 
     public function index(){
