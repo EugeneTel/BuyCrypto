@@ -30,7 +30,8 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        $this->registerConsoleCommand('crypto.generateway', 'Laradev\Crypto\Console\GenerateWay');
+        $this->registerConsoleCommand('crypto.ways', 'Laradev\Crypto\Console\GenerateWays');
+        $this->registerConsoleCommand('crypto.offers', 'Laradev\Crypto\Console\GenerateOffers');
     }
 
     /**
