@@ -1,8 +1,21 @@
-# ===================================
-#  Form Field Definitions
-# ===================================
-
 fields:
-    id:
-        label: ID
-        disabled: true
+    name:
+        label: Name
+        oc.commentPosition: ''
+        span: left
+        placeholder: ''
+        disabled: 0
+        type: text
+    type:
+        label: Type
+        oc.commentPosition: ''
+        options:
+            1: Payment
+            2: Exchange
+            3: Trade
+        span: auto
+        type: dropdown
+    active:
+        label: Active
+        span: left
+        type: switch

@@ -1,8 +1,21 @@
-# ===================================
-#  List Column Definitions
-# ===================================
-
 columns:
     id:
         label: ID
+        type: text
         searchable: true
+    currency_from:
+        label: From
+        type: text
+        relation: currencyFrom
+        valueFrom: name
+    currency_to:
+        label: To
+        type: text
+        relation: currencyTo
+        valueFrom: name
+    name:
+        label: Name
+        type: text
+    active:
+        label: active
+        type: switch

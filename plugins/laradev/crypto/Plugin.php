@@ -81,15 +81,36 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
-
         return [
             'crypto' => [
                 'label'       => 'Crypto',
-                'url'         => Backend::url('laradev/crypto/mycontroller'),
-                'icon'        => 'icon-leaf',
+                'url'         => Backend::url('laradev/crypto/currencycontroller'),
+                'icon'        => 'icon-bitcoin',
                 'permissions' => ['laradev.crypto.*'],
                 'order'       => 500,
+                'sideMenu' => [
+                    'currency' => [
+                        'label'       => 'Currency',
+                        'url'         => Backend::url('laradev/crypto/currencycontroller'),
+                        'icon'        => 'icon-bitcoin',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 1,
+                    ],
+                    'provider' => [
+                        'label'       => 'Provider',
+                        'url'         => Backend::url('laradev/crypto/providercontroller'),
+                        'icon'        => 'icon-cube',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 2,
+                    ],
+                    'pair' => [
+                        'label'       => 'Pair',
+                        'url'         => Backend::url('laradev/crypto/paircontroller'),
+                        'icon'        => 'icon-angellist',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 3,
+                    ],
+                ]
             ],
         ];
     }

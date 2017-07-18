@@ -1,0 +1,10 @@
+name: PairController
+form: $/laradev/crypto/models/pair/fields.yaml
+modelClass: Laradev\Crypto\Models\Pair
+defaultRedirect: laradev/crypto/paircontroller
+create:
+    redirect: 'laradev/crypto/paircontroller/update/:id'
+    redirectClose: laradev/crypto/paircontroller
+update:
+    redirect: laradev/crypto/paircontroller
+    redirectClose: laradev/crypto/paircontroller

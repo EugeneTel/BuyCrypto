@@ -1,0 +1,4 @@
+title: CurrencyController
+modelClass: Laradev\Crypto\Models\Currency
+toolbar:
+    buttons: reorder_toolbar

@@ -1,8 +1,20 @@
-# ===================================
-#  Form Field Definitions
-# ===================================
-
 fields:
-    id:
-        label: ID
-        disabled: true
+    currency_from:
+        label: From
+        oc.commentPosition: ''
+        span: left
+        type: dropdown
+    currency_to:
+        label: To
+        oc.commentPosition: ''
+        span: right
+        type: dropdown
+    name:
+        label: Name
+        oc.commentPosition: ''
+        span: left
+        type: text
+    active:
+        label: Active
+        span: left
+        type: switch

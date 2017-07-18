@@ -26,7 +26,10 @@ class Pair extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
+    public $hasMany = [
+        'currencyFrom' => ['Laradev\Crypto\Models\Currency', 'key' => 'id', 'otherKey' => 'currency_from'],
+        'currencyTo' => ['Laradev\Crypto\Models\Currency', 'key' => 'id', 'otherKey' => 'currency_to'],
+    ];
     public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];
@@ -34,4 +37,13 @@ class Pair extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+
+    public function getCurrencyFromOptions(){
+        return Currency::get()->pluck('name', 'id');
+    }
+
+    public function getCurrencyToOptions(){
+        return Currency::get()->pluck('name', 'id');
+    }
+
 }
