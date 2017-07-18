@@ -27,7 +27,6 @@ class GenerateOffers extends Command
      */
     public function fire()
     {
-        $this->output->writeln('Hello world!');
 
 
 //        $way = Way::
@@ -50,12 +49,12 @@ class GenerateOffers extends Command
 
     protected function generateOfferList(Way $way)
     {
-        $this->output->write(' ' . $way->currency_from . ' => ' . $way->currency_to);
+//        $this->output->write(' ' . $way->currency_from . ' => ' . $way->currency_to);
 
         $offerList = $this->prepareProviderList($way);
         $offerList = $this->arrayToOfferArray($offerList);
 
-        $this->output->writeln(' (Offers: ' . count($offerList) . ')');
+//        $this->output->writeln(' (Offers: ' . count($offerList) . ')');
 
         foreach ($offerList as $offer) {
 

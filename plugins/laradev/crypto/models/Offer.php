@@ -34,4 +34,9 @@ class Offer extends Model
     public $belongsTo = [
         'way' => Way::class,
     ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
+    }
 }
