@@ -110,6 +110,13 @@ class Plugin extends PluginBase
                         'permissions' => ['laradev.crypto.*'],
                         'order'       => 3,
                     ],
+                    'pairProvider' => [
+                        'label'       => 'Pair Provider',
+                        'url'         => Backend::url('laradev/crypto/pairprovidercontroller'),
+                        'icon'        => 'icon-chain',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 4,
+                    ],
                 ]
             ],
         ];

@@ -1,0 +1,4 @@
+title: PairProviderController
+modelClass: Laradev\Crypto\Models\PairProvider
+toolbar:
+    buttons: reorder_toolbar
