@@ -1,5 +1,6 @@
 <?php namespace Laradev\Crypto\Updates;
 
+use Illuminate\Support\Facades\DB;
 use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
@@ -13,7 +14,7 @@ class CreatePairProvidersTable extends Migration
             $table->increments('id');
             $table->integer('pair_id')->unsigned()->index();
             $table->integer('provider_id')->unsigned();
-            $table->decimal('price');
+            $table->double('price');
             $table->string('time_min')->nullable();
             $table->string('time_max')->nullable();
             $table->string('time_avg')->nullable();
@@ -28,6 +29,8 @@ class CreatePairProvidersTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('laradev_crypto_pair_providers');
+//        Schema::dropIfExists('laradev_crypto_pair_providers');
+
+        DB::statement('DROP TABLE IF EXISTS laradev_crypto_pair_providers CASCADE');
     }
 }

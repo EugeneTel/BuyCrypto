@@ -276,7 +276,7 @@ class SeedPairsTable extends Seeder
             'NewLine' => [
                 'OKPay USD' => [
                     'Bitcoin' => [
-                        'price' => 0.000384,
+                        'price' => 1,
                         'time_avg' => 5,
                     ],
                     'Ether' => [
@@ -344,11 +344,37 @@ class SeedPairsTable extends Seeder
                         'price' => 0.965,
                         'time_avg' => 5,
                     ]
+                ],
+                'WMZ' => [
+                    'Яндекс.Деньги' => [
+                        'price' => 59.6,
+                        'time_avg' => 5,
+                    ],
+                    'Capitalist USD' => [
+                        'price' => 0.935,
+                        'time_avg' => 5,
+                    ],
+                ],
+                'Exmo BTC' => [
+                    'Bitcoin' => [
+                        'price' => 0.995,
+                        'time_avg' => 5
+                    ],
                 ]
             ],
 
             // obmen.cc
             'obmen.cc' => [
+                'Приват 24 UAH' => [
+                    'WMZ' => [
+                        'price' => 0.038,
+                        'time_avg' => 3,
+                    ],
+                    'WMU' => [
+                        'price' => 0.985,
+                        'time_avg' => 3,
+                    ]
+                ],
                 'WMZ' => [
                     'Яндекс.Деньги' => [
                         'price' => 59.66,
@@ -368,6 +394,10 @@ class SeedPairsTable extends Seeder
                         'price' => 0.01603,
                         'time_avg' => 5,
                     ],
+                    'Exmo RUB' => [
+                        'price' => 0.94,
+                        'time_avg' => 3,
+                    ],
                 ],
             ],
 
@@ -382,6 +412,20 @@ class SeedPairsTable extends Seeder
                         'price' => 0.98,
                         'time_avg' => 3,
                     ]
+                ],
+                'Яндекс.Деньги' => [
+                    'Capitalist USD' => [
+                        'price' => 0.0155,
+                        'time_avg' => 5,
+                    ],
+                    'WMZ' => [
+                        'price' => 0.015,
+                        'time_avg' => 5,
+                    ],
+                    'Exmo RUB' => [
+                        'price' => 0.945,
+                        'time_avg' => 3,
+                    ],
                 ],
             ]
 

@@ -25,15 +25,8 @@ class Way extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
     public $hasMany = [
         'steps' => Step::class,
+        'offers' => Offer::class,
     ];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
 }

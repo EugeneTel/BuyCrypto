@@ -1,18 +1,19 @@
 <?php namespace Laradev\Crypto\Models;
 
 use Model;
+use October\Rain\Database\Traits\SoftDelete;
 
 /**
- * Step Model
+ * Offer Model
  */
-class Step extends Model
+class Offer extends Model
 {
-    public $timestamps = false;
+    use SoftDelete;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'laradev_crypto_steps';
+    public $table = 'laradev_crypto_offers';
 
     /**
      * @var array Guarded fields
@@ -22,14 +23,20 @@ class Step extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['pair_id', 'order'];
+    protected $fillable = [];
 
     /**
      * @var array Relations
      */
+    public $hasMany = [
+        'offerSteps' => OfferStep::class,
+    ];
     public $belongsTo = [
         'way' => Way::class,
-        'pair' => Pair::class,
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
+    }
 }

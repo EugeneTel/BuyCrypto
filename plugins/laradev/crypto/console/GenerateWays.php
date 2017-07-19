@@ -9,12 +9,12 @@ use Laradev\Crypto\Models\Pair;
 use Laradev\Crypto\Models\Provider;
 use Laradev\Crypto\Models\Way;
 
-class GenerateWay extends Command
+class GenerateWays extends Command
 {
     /**
      * @var string The console command name.
      */
-    protected $name = 'crypto:generateway';
+    protected $name = 'crypto:ways';
 
     /**
      * @var string The console command description.
@@ -152,7 +152,7 @@ class GenerateWay extends Command
 
     public function checkCurrency(Currency $currency, $step = 0, $usedPairList = [])
     {
-        if ($step > $this->stepLimit) {
+        if ($step >= $this->stepLimit) {
             return false;
         }
 
