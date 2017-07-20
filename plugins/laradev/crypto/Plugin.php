@@ -119,6 +119,13 @@ class Plugin extends PluginBase
                         'permissions' => ['laradev.crypto.*'],
                         'order'       => 4,
                     ],
+                    'way' => [
+                        'label'       => 'Ways',
+                        'url'         => Backend::url('laradev/crypto/waycontroller'),
+                        'icon'        => 'icon-angle-double-right',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 5,
+                    ],
                 ]
             ],
         ];

@@ -1,0 +1,10 @@
+name: WayController
+form: $/laradev/crypto/models/way/fields.yaml
+modelClass: Laradev\Crypto\Models\Way
+defaultRedirect: laradev/crypto/waycontroller
+create:
+    redirect: 'laradev/crypto/waycontroller/update/:id'
+    redirectClose: laradev/crypto/waycontroller
+update:
+    redirect: laradev/crypto/waycontroller
+    redirectClose: laradev/crypto/waycontroller

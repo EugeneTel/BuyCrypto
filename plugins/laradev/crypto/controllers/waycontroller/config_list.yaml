@@ -1,0 +1,11 @@
+list: $/laradev/crypto/models/way/columns.yaml
+modelClass: Laradev\Crypto\Models\Way
+title: WayController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'laradev/crypto/waycontroller/update/:id'

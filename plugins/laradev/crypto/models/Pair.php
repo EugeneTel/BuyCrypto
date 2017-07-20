@@ -27,9 +27,6 @@ class Pair extends Model
      */
     public $hasMany = [
         'pairProviders' => PairProvider::class,
-    ];
-    public $hasOne = [];
-    public $hasMany = [
         'currencyFrom' => ['Laradev\Crypto\Models\Currency', 'key' => 'id', 'otherKey' => 'currency_from'],
         'currencyTo' => ['Laradev\Crypto\Models\Currency', 'key' => 'id', 'otherKey' => 'currency_to'],
     ];
