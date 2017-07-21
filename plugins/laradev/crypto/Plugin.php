@@ -126,6 +126,13 @@ class Plugin extends PluginBase
                         'permissions' => ['laradev.crypto.*'],
                         'order'       => 5,
                     ],
+                    'offer' => [
+                        'label'       => 'Offers',
+                        'url'         => Backend::url('laradev/crypto/offercontroller'),
+                        'icon'        => 'icon-angle-double-right',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 6,
+                    ],
                 ]
             ],
         ];

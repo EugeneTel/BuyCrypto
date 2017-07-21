@@ -1,0 +1,4 @@
+title: OfferController
+modelClass: Laradev\Crypto\Models\Offer
+toolbar:
+    buttons: reorder_toolbar
