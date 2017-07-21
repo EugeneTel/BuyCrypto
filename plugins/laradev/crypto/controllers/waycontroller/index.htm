@@ -47,7 +47,7 @@
     foreach($ways as $way){
         echo "<tr><td>$way->id</td>";
             foreach($way->steps as $step){
-                echo '<td>' . $step->pair->name . '</td>';
+                echo '<td style="background: skyblue">' . $step->pair->name . '</td>';
             }
         echo '</tr>';
     }

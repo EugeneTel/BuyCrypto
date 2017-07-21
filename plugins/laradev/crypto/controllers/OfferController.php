@@ -2,6 +2,10 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Illuminate\Support\Facades\Input;
+use Laradev\Crypto\Models\Currency;
+use Laradev\Crypto\Models\Offer;
+use Laradev\Crypto\Models\Way;
 
 class OfferController extends Controller
 {
@@ -14,5 +18,22 @@ class OfferController extends Controller
     public function __construct()
     {
         parent::__construct();
+        BackendMenu::setContext('Laradev.Crypto', 'crypto', 'offer');
     }
+
+    public function index(){
+        if (Input::get('from') == '0' || Input::get('to') == '0' || empty(Input::get('from')) || empty(Input::get('from'))){
+            $this->vars['offer'] = Offer::with('offerSteps')->get();
+        } else {
+            $this->vars['offer'] = Offer::with('offerSteps')
+                ->whereHas('way', function ($q){
+                    $q->where('currency_from', Input::get('from'))->where('currency_to', Input::get('to'));
+                })
+                ->get();
+        }
+        $this->vars['currency'] = array_merge(['0' => 'Select currency'], Currency::get()->pluck('name', 'id')->toArray());
+        $this->vars['input']['from'] = Input::get('from');
+        $this->vars['input']['to'] = Input::get('to');
+    }
+
 }

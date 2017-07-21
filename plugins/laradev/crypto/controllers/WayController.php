@@ -21,7 +21,7 @@ class WayController extends Controller
     }
 
     public function index(){
-        if (Input::get('from') == '0' || Input::get('to') == '0'){
+        if (Input::get('from') == '0' || Input::get('to') == '0' || empty(Input::get('from')) || empty(Input::get('from'))){
             $this->vars['way'] = Way::with('steps')->get();
 
         } else {
