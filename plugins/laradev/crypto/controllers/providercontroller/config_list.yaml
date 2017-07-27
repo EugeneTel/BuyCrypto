@@ -9,3 +9,4 @@ toolbar:
     search:
         prompt: 'backend::lang.list.search_prompt'
 recordUrl: 'laradev/crypto/providercontroller/update/:id'
+recordsPerPage: 20
