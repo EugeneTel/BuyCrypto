@@ -21,12 +21,21 @@ class WayController extends Controller
     }
 
     public function index(){
+
         if (Input::get('from') == '0' || Input::get('to') == '0' || empty(Input::get('from')) || empty(Input::get('from'))){
-            $this->vars['way'] = Way::with('steps')->get();
+            $pagination = Way::with('steps')->paginate(15);
 
         } else {
-            $this->vars['way'] = Way::with('steps')->where('currency_from', Input::get('from'))->where('currency_to', Input::get('to'))->get();
+            $pagination = Way::with('steps')->where('currency_from', Input::get('from'))->where('currency_to', Input::get('to'))->paginate(15);
         }
+
+        $data = $pagination->items();
+
+        $this->vars['paginate'] = $pagination->toArray();
+        $this->vars['paginate']['data'] = $data;
+        $this->vars['paginate']['first_page_url'] = $pagination->url(1);
+        $this->vars['paginate']['last_page_url'] = $pagination->url($pagination->lastPage());
+
         $this->vars['currency'] = array_merge(['0' => 'Select currency'], Currency::get()->pluck('name', 'id')->toArray());
         $this->vars['input']['from'] = Input::get('from');
         $this->vars['input']['to'] = Input::get('to');

@@ -2,8 +2,25 @@
     <div data-control="toolbar">
         <div class="control-toolbar">
             <div class="toolbar-item toolbar-primary">
+                <div class="pull-right">
+                    <a class="btn icon-prev btn-default" href="<?= $vars['paginate']['first_page_url'] . '&from=' .  $this->vars['input']['from'] . '&to=' .$this->vars['input']['to']?>">First</a>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['prev_page_url'] . '&from=' .  $this->vars['input']['from'] . '&to=' .$this->vars['input']['to']?>">Prev</a>
+                    <strong class="btn active btn-info icon-prev text-info"><?=$vars['paginate']['current_page']?></strong>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['next_page_url'] . '&from=' .  $this->vars['input']['from'] . '&to=' .$this->vars['input']['to']?>">Next</a>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['last_page_url'] . '&from=' .  $this->vars['input']['from'] . '&to=' .$this->vars['input']['to']?>">Last</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toolbar-widget list-header" id="Toolbar-listToolbar">
+    <div data-control="toolbar">
+        <div class="control-toolbar">
+            <div class="toolbar-item toolbar-primary">
                 <?php
-                    $ways = $this->vars['way'];
+                    $ways = $this->vars['paginate']['data'];
+
                     $currencies = $this->vars['currency'];
                 ?>
 
@@ -44,7 +61,9 @@
 <table class="way-table table-hover table table-striped">
 
 <?php
+
     foreach($ways as $way){
+
         echo "<tr><td>$way->id</td>";
             foreach($way->steps as $step){
                 echo '<td style="background: skyblue">' . $step->pair->name . '</td>';
