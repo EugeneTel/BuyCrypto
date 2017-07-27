@@ -36,8 +36,20 @@ class OfferController extends Controller
 
         $this->vars['paginate'] = $pagination->toArray();
         $this->vars['paginate']['data'] = $data;
-        $this->vars['paginate']['first_page_url'] = $pagination->url(1);
-        $this->vars['paginate']['last_page_url'] = $pagination->url($pagination->lastPage());
+
+        $this->vars['paginate']['first_page_url'] = $pagination->url(1) . "&from=" . Input::get('from') . "&to=" . Input::get('to');
+        $this->vars['paginate']['last_page_url'] = $pagination->url($pagination->lastPage()) . "&from=" . Input::get('from') . "&to=" . Input::get('to');
+
+        if($this->vars['paginate']['prev_page_url']){
+            $this->vars['paginate']['prev_page_url'] = $this->vars['paginate']['prev_page_url'] . "&from=" . Input::get('from') . "&to=" . Input::get('to');
+        } else {
+            $this->vars['paginate']['prev_page_url'] = '';
+        }
+        if ($this->vars['paginate']['next_page_url']){
+            $this->vars['paginate']['next_page_url'] = $this->vars['paginate']['next_page_url'] . "&from=" . Input::get('from') . "&to=" . Input::get('to');
+        } else {
+            $this->vars['paginate']['next_page_url'] = '';
+        }
 
         $this->vars['currency'] = array_merge(['0' => 'Select currency'], Currency::get()->pluck('name', 'id')->toArray());
         $this->vars['input']['from'] = Input::get('from');

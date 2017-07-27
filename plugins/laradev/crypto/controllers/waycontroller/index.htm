@@ -4,16 +4,15 @@
             <div class="toolbar-item toolbar-primary">
 
                 <div class="pull-right">
-                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['first_page_url']  . '&from=' .  $this->vars['input']['from'] . '&to=' .$this->vars['input']['to']?>">First</a>
-                    <a class="btn icon-prev btn-default" href="?<?='from=' .  $this->vars['input']['from'] . '&to=' .$this->vars['input']['to'] . $vars['paginate']['prev_page_url']?>">Prev</a>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['first_page_url']?>">First</a>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['prev_page_url']?>">Prev</a>
                     <strong class="btn active btn-info icon-prev text-info"><?=$vars['paginate']['current_page']?></strong>
-                    <a class="btn icon-prev btn-default" href="?<?='from=' .  $this->vars['input']['from'] . '&to=' .$this->vars['input']['to'] . $vars['paginate']['next_page_url']?>">Next</a>
-                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['last_page_url'] . '&from=' .  $this->vars['input']['from'] . '&to=' .$this->vars['input']['to']?>">Last</a>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['next_page_url']?>">Next</a>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['last_page_url']?>">Last</a>
                 </div>
 
                 <?php
                     $ways = $this->vars['paginate']['data'];
-
                     $currencies = $this->vars['currency'];
                 ?>
 
