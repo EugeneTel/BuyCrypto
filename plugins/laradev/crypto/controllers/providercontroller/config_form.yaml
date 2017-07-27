@@ -1,0 +1,10 @@
+name: ProviderController
+form: $/laradev/crypto/models/provider/fields.yaml
+modelClass: Laradev\Crypto\Models\Provider
+defaultRedirect: laradev/crypto/providercontroller
+create:
+    redirect: 'laradev/crypto/providercontroller/update/:id'
+    redirectClose: laradev/crypto/providercontroller
+update:
+    redirect: laradev/crypto/providercontroller
+    redirectClose: laradev/crypto/providercontroller

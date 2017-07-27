@@ -1,8 +1,30 @@
-# ===================================
-#  List Column Definitions
-# ===================================
-
 columns:
     id:
         label: ID
+        type: text
         searchable: true
+    pair_id:
+        label: Pair
+        type: text
+        relation: pair
+        valueFrom: name
+    provider_id:
+        label: Provider
+        type: text
+        relation: provider
+        valueFrom: name
+    price:
+        label: Price
+        type: text
+    time_min:
+        label: 'Time min'
+        type: text
+    time_max:
+        label: 'Time max'
+        type: text
+    time_avg:
+        label: 'Time avg'
+        type: text
+    price_changed_at:
+        label: 'Price cahnged'
+        type: text

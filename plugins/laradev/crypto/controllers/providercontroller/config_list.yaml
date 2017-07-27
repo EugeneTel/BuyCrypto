@@ -1,0 +1,11 @@
+list: $/laradev/crypto/models/provider/columns.yaml
+modelClass: Laradev\Crypto\Models\Provider
+title: ProviderController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'laradev/crypto/providercontroller/update/:id'

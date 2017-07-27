@@ -13,7 +13,7 @@ class BchCurrency extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'ikas_parser_bch_currency';
+    public $table = 'ikas_parser_bch_currencies';
 
     /**
      * @var array Guarded fields

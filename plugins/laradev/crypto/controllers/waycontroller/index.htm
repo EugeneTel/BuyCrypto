@@ -1,0 +1,55 @@
+<div class="toolbar-widget list-header" id="Toolbar-listToolbar">
+    <div data-control="toolbar">
+        <div class="control-toolbar">
+            <div class="toolbar-item toolbar-primary">
+                <?php
+                    $ways = $this->vars['way'];
+                    $currencies = $this->vars['currency'];
+                ?>
+
+                <form action="/backend/laradev/crypto/waycontroller">
+                    <label for="from">From: </label>
+                    <select class="form-control way-pair-select" name="from" id="from" style="width: 25%; vertical-align: middle;">
+
+                    <?php
+                        foreach($currencies as $id => $currency){
+                            echo "<option value='$id'";
+                            if($id == $this->vars['input']['from']){
+                                echo "selected";
+                            }
+                            echo ">$currency</option>";
+                        }
+                    ?>
+
+                    </select>
+                    <label for="to">To: </label>
+                    <select class="form-control way-pair-select" style="width: 25%; vertical-align: middle;" name="to" id="to">
+                        <?php
+                            foreach($currencies as $id => $currency){
+                                echo "<option value='$id'";
+                                if($id == $this->vars['input']['to']){
+                                    echo "selected";
+                                }
+                                echo ">$currency</option>";
+                            }
+                        ?>
+                    </select>
+                    <input type="submit" class="btn btn-success" value="Search">
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<table class="way-table table-hover table table-striped">
+
+<?php
+    foreach($ways as $way){
+        echo "<tr><td>$way->id</td>";
+            foreach($way->steps as $step){
+                echo '<td style="background: skyblue">' . $step->pair->name . '</td>';
+            }
+        echo '</tr>';
+    }
+?>
+</table>

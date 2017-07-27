@@ -27,7 +27,10 @@ class PairProvider extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'pair' => ['Laradev\Crypto\Models\Pair'],
+        'provider' => ['Laradev\Crypto\Models\Provider'],
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

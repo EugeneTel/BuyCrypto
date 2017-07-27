@@ -1,0 +1,10 @@
+name: OfferController
+form: $/laradev/crypto/models/offer/fields.yaml
+modelClass: Laradev\Crypto\Models\Offer
+defaultRedirect: laradev/crypto/offercontroller
+create:
+    redirect: 'laradev/crypto/offercontroller/update/:id'
+    redirectClose: laradev/crypto/offercontroller
+update:
+    redirect: laradev/crypto/offercontroller
+    redirectClose: laradev/crypto/offercontroller

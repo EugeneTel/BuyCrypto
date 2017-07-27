@@ -1,0 +1,4 @@
+title: WayController
+modelClass: Laradev\Crypto\Models\Way
+toolbar:
+    buttons: reorder_toolbar

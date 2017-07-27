@@ -83,15 +83,57 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
-
         return [
             'crypto' => [
                 'label'       => 'Crypto',
-                'url'         => Backend::url('laradev/crypto/mycontroller'),
-                'icon'        => 'icon-leaf',
+                'url'         => Backend::url('laradev/crypto/currencycontroller'),
+                'icon'        => 'icon-bitcoin',
                 'permissions' => ['laradev.crypto.*'],
                 'order'       => 500,
+                'sideMenu' => [
+                    'currency' => [
+                        'label'       => 'Currency',
+                        'url'         => Backend::url('laradev/crypto/currencycontroller'),
+                        'icon'        => 'icon-bitcoin',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 1,
+                    ],
+                    'provider' => [
+                        'label'       => 'Provider',
+                        'url'         => Backend::url('laradev/crypto/providercontroller'),
+                        'icon'        => 'icon-cube',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 2,
+                    ],
+                    'pair' => [
+                        'label'       => 'Pair',
+                        'url'         => Backend::url('laradev/crypto/paircontroller'),
+                        'icon'        => 'icon-angellist',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 3,
+                    ],
+                    'pairProvider' => [
+                        'label'       => 'Pair Provider',
+                        'url'         => Backend::url('laradev/crypto/pairprovidercontroller'),
+                        'icon'        => 'icon-chain',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 4,
+                    ],
+                    'way' => [
+                        'label'       => 'Ways',
+                        'url'         => Backend::url('laradev/crypto/waycontroller'),
+                        'icon'        => 'icon-angle-double-right',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 5,
+                    ],
+                    'offer' => [
+                        'label'       => 'Offers',
+                        'url'         => Backend::url('laradev/crypto/offercontroller'),
+                        'icon'        => 'icon-angle-double-right',
+                        'permissions' => ['laradev.crypto.*'],
+                        'order'       => 6,
+                    ],
+                ]
             ],
         ];
     }

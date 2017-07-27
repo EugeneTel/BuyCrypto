@@ -38,4 +38,13 @@ class Currency extends Model
     const TYPE_FIAT = 1;
     const TYPE_CRYPTO = 2;
     const TYPE_TRADE = 3;
+
+    public function getTypeOptions(){
+        return [
+            self::TYPE_FIAT => 'Fiat',
+            self::TYPE_CRYPTO => 'Crypto',
+            self::TYPE_TRADE => 'Trade'
+        ];
+    }
+
 }

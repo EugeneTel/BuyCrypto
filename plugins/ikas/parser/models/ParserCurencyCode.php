@@ -26,7 +26,7 @@ class ParserCurencyCode extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'ikas_parser_currency_code';
+    public $table = 'ikas_parser_currency_codes';
 
     public function getCryptoCurrenciesIdOptions(){
         $systemCurrency = ['null' => 'No relation'];

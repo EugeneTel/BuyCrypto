@@ -1,0 +1,4 @@
+title: ProviderController
+modelClass: Laradev\Crypto\Models\Provider
+toolbar:
+    buttons: reorder_toolbar

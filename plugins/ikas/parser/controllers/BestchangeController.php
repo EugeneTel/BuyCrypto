@@ -39,6 +39,8 @@ class BestchangeController extends Controller
             $this->saveData($contents);
         };
 
+        return redirect()->back();
+
     }
 
     public function unzipDir()
