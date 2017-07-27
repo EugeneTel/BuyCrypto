@@ -1,0 +1,10 @@
+name: ParserCurrencyCodeController
+modelClass: Ikas\Parser\Models\ParserCurencyCode
+form: $/ikas/parser/models/parsercurencycode/fields.yaml
+defaultRedirect: ikas/parser/parsercurrencycodecontroller
+create:
+    redirect: 'ikas/parser/parsercurrencycodecontroller/update/:id'
+    redirectClose: ikas/parser/parsercurrencycodecontroller
+update:
+    redirect: ikas/parser/parsercurrencycodecontroller
+    redirectClose: ikas/parser/parsercurrencycodecontroller

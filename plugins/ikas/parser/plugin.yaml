@@ -1,0 +1,28 @@
+plugin:
+    name: 'ikas.parser::lang.plugin.name'
+    description: 'ikas.parser::lang.plugin.description'
+    author: iKas
+    icon: oc-icon-exchange
+    homepage: ''
+navigation:
+    parser:
+        label: Parser
+        url: ikas/parser/parsercurrencycodecontroller
+        icon: icon-exchange
+        sideMenu:
+            associations:
+                label: Associations
+                url: ikas/parser/parsercurrencycodecontroller
+                icon: icon-rotate-left
+            cryptowatch-data:
+                label: 'Cryptowatch table'
+                url: ikas/parser/cryptowatchcontroller
+                icon: icon-table
+            bestchange:
+                label: Bestchange
+                url: ikas/parser/bestchangecontroller
+                icon: icon-table
+            settings:
+                label: Settings
+                url: ikas/parser/settings
+                icon: icon-gears

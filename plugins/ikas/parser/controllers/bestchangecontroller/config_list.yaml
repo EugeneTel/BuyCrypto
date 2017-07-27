@@ -1,0 +1,11 @@
+list: $/ikas/parser/models/bestchange/columns.yaml
+modelClass: Ikas\Parser\Models\Bestchange
+title: BestchangeController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'ikas/parser/bestchangecontroller/update/:id'

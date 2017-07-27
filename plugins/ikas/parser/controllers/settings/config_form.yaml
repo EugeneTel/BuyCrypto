@@ -1,0 +1,10 @@
+name: Settings
+form: $/ikas/parser/models/settings/fields.yaml
+modelClass: Ikas\Parser\Models\Settings
+defaultRedirect: ikas/parser/settings
+create:
+    redirect: 'ikas/parser/settings/update/:id'
+    redirectClose: ikas/parser/settings
+update:
+    redirect: ikas/parser/settings
+    redirectClose: ikas/parser/settings

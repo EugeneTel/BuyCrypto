@@ -1,0 +1,4 @@
+title: CryptowatchController
+modelClass: Ikas\Parser\Models\CryptowatchData
+toolbar:
+    buttons: reorder_toolbar

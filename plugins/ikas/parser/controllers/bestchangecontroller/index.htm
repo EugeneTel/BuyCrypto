@@ -1,0 +1,44 @@
+<div class="toolbar-widget list-header" id="Toolbar-listToolbar">
+    <div data-control="toolbar">
+        <div class="control-toolbar">
+            <div class="toolbar-item toolbar-primary">
+                <a class="btn btn-primary icon-stack-overflow"
+                   href="<?= Backend::url('ikas/parser/bestchangecontroller/parseStart') ?>">Parse</a>
+                <div class="pull-right">
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['first_page_url']?>">First</a>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['prev_page_url']?>">Prev</a>
+                    <strong class="btn active btn-info icon-prev text-info"><?=$vars['paginate']['current_page']?></strong>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['next_page_url']?>">Next</a>
+                    <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['last_page_url']?>">Last</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="list-widget list-scrollable-container" id="Lists">
+    <div class="control-list list-scrollable" data-control="listwidget">
+        <table class="table data" data-control="rowlink">
+            <thead>
+            <th class="active list-cell-name-id list-cell-type-text"><a>ID</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>From</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>To</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>Exchange</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>Amount</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>From rate</a></th>
+            <th class="active list-cell-name-id list-cell-type-text"><a>To rate</a></th>
+            </thead>
+            <tbody>
+            <?php
+                foreach($vars['paginate']['data'] as $row){
+                    echo '<tr class="rowlink">';
+                    foreach($row as $k => $val){
+                        echo "<td class='list-cell-index-1 list-cell-name-id list-cell-type-text'>$val</td>";
+                    }
+                    echo '</tr>';
+                }
+            ?>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+fields:
+    name:
+        label: 'Parser currency name'
+        oc.commentPosition: ''
+        span: left
+        type: text
+    code:
+        label: 'Parser currency code'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    crypto_currencies_id:
+        label: 'System currency code'
+        oc.commentPosition: ''
+        span: left
+        type: dropdown

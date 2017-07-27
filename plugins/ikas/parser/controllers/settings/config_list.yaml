@@ -1,0 +1,11 @@
+list: $/ikas/parser/models/settings/columns.yaml
+modelClass: Ikas\Parser\Models\Settings
+title: Settings
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'ikas/parser/settings/update/:id'

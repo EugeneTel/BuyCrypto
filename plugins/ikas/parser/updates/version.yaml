@@ -1,0 +1,18 @@
+1.0.1:
+    - Initialize plugin.
+1.0.2:
+    - Create table [ ikas_parser_currency_code ]
+    - create_parser_currency_code_table.php
+1.0.3:
+    - Create table [ ikas_parser_cryptowatch ]
+    - create_parser_cryptowatch_table.php
+1.0.4:
+    - Create table [ ikas_parser_bestchange ]
+    - create_parser_bestchange_table.php
+1.0.5:
+    - Create tables for BCH parser
+    - create_parser_settings_table.php
+    - seed_settings_table.php
+    - create_bch_currency_codes_table.php
+    - create_bch_currency_table.php
+    - create_bch_exchanges_table.php

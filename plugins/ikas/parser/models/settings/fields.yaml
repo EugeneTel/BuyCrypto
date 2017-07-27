@@ -1,0 +1,17 @@
+fields:
+    name:
+        label: Name
+        oc.commentPosition: ''
+        span: left
+        type: text
+    value:
+        label: Value
+        oc.commentPosition: ''
+        span: full
+        type: text
+    default:
+        label: 'Default value'
+        oc.commentPosition: ''
+        span: full
+        disabled: 1
+        type: text
