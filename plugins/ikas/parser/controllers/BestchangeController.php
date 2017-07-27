@@ -6,7 +6,9 @@ use Ikas\Parser\Models\BchCurrency;
 use Ikas\Parser\Models\BchCurrencyCode;
 use Ikas\Parser\Models\BchExchange;
 use Ikas\Parser\Models\Bestchange;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use October\Rain\Support\Facades\Flash;
 
@@ -27,19 +29,48 @@ class BestchangeController extends Controller
 
     public function __construct()
     {
+        $this->fileDirUnzip = Settings::get('bestchange.file_dir.unzip.info');
         parent::__construct();
         BackendMenu::setContext('Ikas.Parser', 'parser', 'bestchange');
     }
 
-    public function parseStart()
+    public function refreshData()
     {
 
         if ($this->unzipDir()) {
+
             $contents = $this->readFile();
+            
+            Artisan::call('plugin:refresh', ['name' => 'ikas.parser']);
+            
             $this->saveData($contents);
         };
 
         return redirect()->back();
+    }
+
+    public function parseStart(){
+
+        $step = 50;
+
+        $point = Input::get('point');
+
+        $data = $this->readFile();
+
+        $contents = $data['bm_rates.dat'];
+        if ($point < count($contents)){
+
+            $this->saveBestchange($point, $point + $step, $contents);
+            $parser = [
+                'point' => $point + $step,
+                'percent' =>  round( (($point + $step)/count($contents))*100, 2),
+                'total' => count($contents)
+            ];
+            echo json_encode($parser);
+        }
+
+
+        die();
 
     }
 
@@ -50,7 +81,6 @@ class BestchangeController extends Controller
 
             $fileSource = Settings::get('bestchange.file_dir.source.info');
             $fileDir = Settings::get('bestchange.file_dir.info');
-            $this->fileDirUnzip = Settings::get('bestchange.file_dir.unzip.info');
 
             copy($fileSource, $fileDir);
 
@@ -92,9 +122,10 @@ class BestchangeController extends Controller
             return false;
         }
 
+        $this->files = explode('|', $this->files);
+
         $contents = [];
 
-        $this->files = explode('|', $this->files);
         foreach ($this->files as $file) {
             try {
                 if (file_exists($this->fileDirUnzip . $file)) {
@@ -135,9 +166,7 @@ class BestchangeController extends Controller
         if (in_array('bm_exch.dat', $this->files)){
             $this->saveExchange($data);
         }
-        if (in_array('bm_rates.dat', $this->files)){
-            $this->saveBestchange($data);
-        }
+
     }
 
     public function saveCurrencyCode($data = []){
@@ -221,37 +250,39 @@ class BestchangeController extends Controller
 
     }
 
-    public function saveBestchange($data = []){
-
-        $contents = $data['bm_rates.dat'];
+    public function saveBestchange($from = 0, $to = 0, $contents = null){
 
         if(empty($contents)){
             return false;
         }
-        set_time_limit(600);
-        foreach ($contents as $row){
-            $bch = Bestchange::where('from', $row[0])->where('to', $row[1])->where('bch_exchanges_id', $row[2]);
-            if(empty($bch->get()->toArray())){
-                $bch = new Bestchange();
-                $bch->from = $row[0];
-                $bch->to = $row[1];
-                $bch->bch_exchanges_id = $row[2];
-                $bch->amount = $row[3];
-                $bch->from_rate = $row[4];
-                $bch->to_rate = $row[5];
-                $bch->save();
-            } else {
-                $bch->update([
-                    'from' => $row[0],
-                    'to' => $row[1],
-                    'bch_exchanges_id' => $row[2],
-                    'amount' => $row[3],
-                    'from_rate' => $row[4],
-                    'to_rate' => $row[5],
-                ]);
-            };
+
+        if ($from < count($contents)){
+            for($i = $from; $i< $to; $i++){
+                if ( $i < count($contents)){
+                    $row = $contents[$i];
+                    //$bch = Bestchange::where('from', $row[0])->where('to', $row[1])->where('bch_exchanges_id', $row[2]);
+                    //if(empty($bch->get()->toArray())){
+                        $bch = new Bestchange();
+                        $bch->from = $row[0];
+                        $bch->to = $row[1];
+                        $bch->bch_exchanges_id = $row[2];
+                        $bch->amount = $row[3];
+                        $bch->from_rate = $row[4];
+                        $bch->to_rate = $row[5];
+                        $bch->save();
+                   /* } else {
+                        $bch->update([
+                            'from' => $row[0],
+                            'to' => $row[1],
+                            'bch_exchanges_id' => $row[2],
+                            'amount' => $row[3],
+                            'from_rate' => $row[4],
+                            'to_rate' => $row[5],
+                        ]);
+                    };*/
+                }
+            }
         }
-        set_time_limit(30);
 
     }
 

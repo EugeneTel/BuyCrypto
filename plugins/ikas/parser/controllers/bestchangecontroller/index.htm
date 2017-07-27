@@ -2,8 +2,19 @@
     <div data-control="toolbar">
         <div class="control-toolbar">
             <div class="toolbar-item toolbar-primary">
-                <a class="btn btn-primary icon-stack-overflow"
-                   href="<?= Backend::url('ikas/parser/bestchangecontroller/parseStart') ?>">Parse</a>
+
+                <a class="btn btn-primary icon-refresh"
+                   href="<?= Backend::url('ikas/parser/bestchangecontroller/refreshData') ?>"> Refresh data</a>
+
+                <a class="btn btn-primary icon-stack-overflow parse"> Parse</a>
+
+                <div id="result" style="font-size: 20px; padding: 20px 0 0;" point = "0" percent = "0">
+                    <div class="progress" style="height: 20px; line-height: 20px">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% Complete</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="pull-right">
                     <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['first_page_url']?>">First</a>
                     <a class="btn icon-prev btn-default" href="<?=$vars['paginate']['prev_page_url']?>">Prev</a>
@@ -42,3 +53,30 @@
         </table>
     </div>
 </div>
+
+<script>
+    $('.parse').click(function () {
+        console.log('run');
+        parse();
+    });
+
+    function parse() {
+        $.get(
+                "/backend/ikas/parser/bestchangecontroller/parseStart",
+                {
+                    point: $('#result').attr('point'),
+                }
+        ).done(function(data) {
+            data = jQuery.parseJSON(data);
+            $('#result').attr('point', data.point);
+            $('#result').attr('percent', data.percent);
+            $('#result').attr('total', data.total);
+            $('.progress').html('<div class="progress-bar" role="progressbar" aria-valuenow="'+data.percent+'" aria-valuemin="0" aria-valuemax="100" style="width: '+data.percent+'%; height: 20px; line-height: 20px"> <span class="status" style="color:#000; width: 100%; position: absolute; left:0">'+data.percent+'% Total: '+data.point+' / '+data.total+'</span> </div>');
+            if (data.point < data.total){
+                parse();
+            } else {
+                location.reload();
+            }
+        });
+    }
+</script>
