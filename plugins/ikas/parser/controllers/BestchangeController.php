@@ -41,7 +41,7 @@ class BestchangeController extends Controller
 
             $contents = $this->readFile();
             
-            Artisan::call('plugin:refresh', ['name' => 'ikas.parser']);
+            Bestchange::getQuery()->delete();
             
             $this->saveData($contents);
         };

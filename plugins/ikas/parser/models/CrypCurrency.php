@@ -20,7 +20,9 @@ class CrypCurrency extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['id', 'fiat'];
+
+    public $timestamps = false;
 
     /**
      * @var array Relations

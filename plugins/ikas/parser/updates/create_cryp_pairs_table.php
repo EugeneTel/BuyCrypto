@@ -11,6 +11,8 @@ class CreateCrypPairsTable extends Migration
         Schema::create('ikas_parser_cryp_pairs', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('id')->unique();
+            $table->string('from_id');
+            $table->string('to_id');
             $table->foreign('from_id')->references('id')->on('ikas_parser_cryp_currencies');
             $table->foreign('to_id')->references('id')->on('ikas_parser_cryp_currencies');
         });

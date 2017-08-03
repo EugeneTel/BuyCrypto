@@ -22,6 +22,8 @@ class CrypPairs extends Model
      */
     protected $fillable = [];
 
+    public $timestamps = false;
+
     /**
      * @var array Relations
      */

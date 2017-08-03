@@ -2,8 +2,12 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Ikas\Parser\Models\CrypCurrency;
+use Ikas\Parser\Models\CrypPairs;
+use Ikas\Parser\Models\CrypProvider;
 use Ikas\Parser\Models\CryptowatchData;
 use Illuminate\Support\Facades\Log;
+use Laradev\Crypto\Models\Currency;
 
 class CryptowatchController extends Controller
 {
@@ -20,23 +24,86 @@ class CryptowatchController extends Controller
     }
 
 
-    public $parsePageUrl = 'https://api.cryptowat.ch/markets/prices';
+    public $priceUrl = 'https://api.cryptowat.ch/markets/prices';
+    public $currencyUrl = 'https://api.cryptowat.ch/assets';
+    public $pairUrl = 'https://api.cryptowat.ch/pairs';
+    public $exchengeUrl = 'https://api.cryptowat.ch/exchanges';
 
     public function parse(){
-        try{
-            $data = json_decode(file_get_contents($this->parsePageUrl), true);
-            if (!empty($data['result'])){
-                $prepareData = $this->prepareData($data['result']);
-                $this->saveData($prepareData);
+
+        $currencies = $this->getDataByUrl($this->currencyUrl);
+        $this->saveCurrency($currencies);
+        $pairs = $this->getDataByUrl($this->pairUrl);
+        $this->savePair($pairs);
+        $providers = $this->getDataByUrl($this->exchengeUrl);
+        $this->saveProvider($providers);
+        $prices = $this->getDataByUrl($this->priceUrl);
+        $this->savePrice($prices);
+
+        return redirect()->back();
+    }
+
+    public function saveCurrency($data){
+        CrypCurrency::getQuery()->delete();
+        foreach ($data as $row){
+            try{
+                $currency = new CrypCurrency();
+                $currency->id = $row['id'];
+                $currency->name = $row['name'];
+                $currency->fiat = $row['fiat'];
+                $currency->route = $row['route'];
+                $currency->save();
+            } catch (\Exception $e){
+                Log::error($e);
             }
+        }
+    }
+
+    public function savePair($data){
+        CrypPairs::getQuery()->delete();
+        foreach ($data as $row){
+            try{
+                $pair = new CrypPairs();
+                $pair->id = $row['id'];
+                $pair->from_id = $row['base']['id'];
+                $pair->to_id = $row['quote']['id'];
+                $pair->save();
+            } catch (\Exception $e){
+                Log::error($e);
+            }
+        }
+    }
+
+    public function saveProvider($data){
+        CrypProvider::getQuery()->delete();
+        foreach ($data as $row){
+            try{
+                $provider = new CrypProvider();
+                $provider->id = $row['id'];
+                $provider->name = $row['name'];
+                $provider->active = $row['active'];
+                $provider->route = $row['route'];
+                $provider->save();
+            } catch (\Exception $e){
+                Log::error($e);
+            }
+        }
+    }
+
+    public function getDataByUrl($url){
+        try{
+            $data = json_decode(file_get_contents($url), true);
+            if (!empty($data['result'])){
+                return $data['result'];
+            }
+
         } catch (\Exception $e){
             \Flash::error($e->getMessage());
             Log::error($e);
         }
-        return redirect()->back();
     }
 
-    public function prepareData($data){
+    public function prepareDataPrice($data){
         $dataForSave = [];
         foreach ($data as $key => $price){
             $exchangePair = explode(':', $key);
@@ -50,19 +117,23 @@ class CryptowatchController extends Controller
         return $dataForSave;
     }
 
-    public function saveData($data){
+    public function savePrice($data){
+        $data = $this->prepareDataPrice($data);
         foreach ($data as $item){
+
+            $findRow = CryptowatchData::where('provider_id', $item['exchange'])->where('pair_id', $item['currency_pair']);
+            if(empty($findRow->get()->toArray())){
+                $cryptowatch = new CryptowatchData();
+                $cryptowatch->provider_id = $item['exchange'];
+                $cryptowatch->pair_id = $item['currency_pair'];
+                $cryptowatch->price = $item['price'];
+                $cryptowatch->save();
+            } else {
+                $findRow->update(['price' => $item['price']]);
+            };
+
             try{
-                $findRow = CryptowatchData::where('exchange', $item['exchange'])->where('currency_pair', $item['currency_pair']);
-                if(empty($findRow->get()->toArray())){
-                    $cryptowatch = new CryptowatchData();
-                    $cryptowatch->exchange = $item['exchange'];
-                    $cryptowatch->currency_pair = $item['currency_pair'];
-                    $cryptowatch->price = $item['price'];
-                    $cryptowatch->save();
-                } else {
-                    $findRow->update(['price' => $item['price']]);
-                };
+
             } catch (\Exception $e){
                 Log::error($e);
             }

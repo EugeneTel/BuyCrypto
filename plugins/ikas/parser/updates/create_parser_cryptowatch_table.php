@@ -12,11 +12,9 @@ class CreateParserCryptowatchTable extends Migration
         Schema::create('ikas_parser_cryptowatch', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('exchange', 20);
-            $table->string('currency_pair', 30);
+            $table->string('provider_id', 20)->references('id')->on('ikas_parser_cryp_providers');
+            $table->string('pair_id', 30)->references('id')->on('ikas_parser_cryp_pairs');
             $table->string('price');
-            $table->integer('providers_id')->references('id')->on('laradev_crypto_providers')->nullable();
-            $table->integer('pairs_id')->references('id')->on('laradev_crypto_providers')->nullable();
         });
     }
 

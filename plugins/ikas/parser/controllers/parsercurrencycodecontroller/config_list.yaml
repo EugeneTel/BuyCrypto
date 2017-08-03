@@ -1,6 +1,6 @@
 title: ParserCurrencyCodeController
-modelClass: Ikas\Parser\Models\ParserCurencyCode
-list: $/ikas/parser/models/parsercurencycode/columns.yaml
+modelClass: Ikas\Parser\Models\ParserCurrencyCode
+list: $/ikas/parser/models/parsercurrencycode/columns.yaml
 recordUrl: 'ikas/parser/parsercurrencycodecontroller/update/:id'
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

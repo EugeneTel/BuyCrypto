@@ -7,7 +7,7 @@ use Model;
 /**
  * Model
  */
-class ParserCurencyCode extends Model
+class ParserCurrencyCode extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     
@@ -35,7 +35,7 @@ class ParserCurencyCode extends Model
     }
 
     public function beforeCreate(){
-        $data = Input::get('ParserCurencyCode');
+        $data = Input::get('ParserCurrencyCode');
         if($data['crypto_currencies_id'] === 'null'){
             $this->crypto_currencies_id = null;
         };

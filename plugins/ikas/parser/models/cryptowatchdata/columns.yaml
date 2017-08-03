@@ -2,10 +2,10 @@ columns:
     id:
         label: ID
         type: text
-    exchange:
+    provider_id:
         label: Provider
         type: text
-    currency_pair:
+    pair_id:
         label: Pair
         type: text
     price:

@@ -4,7 +4,10 @@
     - Create table [ ikas_parser_currency_code ]
     - create_parser_currency_codes_table.php
 1.0.3:
-    - Create table [ ikas_parser_cryptowatch ]
+    - Create tables for cryptowatch
+    - create_cryp_currencies_table.php
+    - create_cryp_pairs_table.php
+    - create_cryp_providers_table.php
     - create_parser_cryptowatch_table.php
 1.0.4:
     - Create table [ ikas_parser_bestchange ]
