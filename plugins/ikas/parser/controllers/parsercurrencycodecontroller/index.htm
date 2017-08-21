@@ -1,1 +1,30 @@
-<?= $this->listRender() ?>
+<div class="list-widget list-scrollable-container" id="Lists">
+    <div class="control-list">
+        <form method="post" data-request="onSaveAssociationCurrency">
+            <div class="row"><div class="col-lg-12"><h2 class="text-center">Currency Association</h2></div></div>
+                <div class="row">
+                    <div style="background-color:rgba(0, 255, 117, 0.11); overflow: hidden; padding: 10px 0 20px">
+                        <div class="col-lg-4">
+                            <p class="text-center"><strong>Buy Crypto</strong></p>
+                            <?php include_once "_list_buycrypto.htm"?>
+                        </div>
+                        <div class="col-lg-4">
+                            <p class="text-center"><strong>Crypto Watch</strong></p>
+                            <?php include_once "_list_cryptowatch.htm"?>
+                        </div>
+                        <div class="col-lg-4">
+                            <p class="text-center"><strong>Best Change</strong></p>
+                            <?php include_once "_list_bestchange.htm"?>
+                        </div>
+                        <div style="padding: 10px 10px 20px; overflow: hidden">
+                            <input  type="submit" class="btn btn-primary pull-right" value="Add">
+                        </div>
+                        <div class="row">
+                            <?php include_once "_table_currency.htm"?>
+                        </div>
+                    </div>
+                </div
+            </div>
+        </form>
+    </div>
+</div>

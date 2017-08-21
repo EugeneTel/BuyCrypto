@@ -1,0 +1,22 @@
+<table class="table data" data-control="rowlink" style="background: #fff">
+    <thead>
+    <tr>
+        <th class="active list-cell-name-id list-cell-type-text"><a>ID</a></th>
+        <th class="active list-cell-name-id list-cell-type-text"><a>Buy Crypto</a></th>
+        <th class="active list-cell-name-id list-cell-type-text"><a>Association Currency</a></th>
+        <th class="active list-cell-name-id list-cell-type-text"><a>Resource</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($this->vars["currecyTable"] as $row){
+        echo '<tr class="rowlink">';
+        echo '<td class="list-cell-index-1 list-cell-name-id list-cell-type-text">'. $row['id'] .'</td>';
+        echo '<td class="list-cell-index-1 list-cell-name-id list-cell-type-text">'. $row['buy_currency_id'] .'</td>';
+        echo '<td class="list-cell-index-1 list-cell-name-id list-cell-type-text">'. $row['out_id'] .'</td>';
+        echo '<td class="list-cell-index-1 list-cell-name-id list-cell-type-text">'. $row['resource'] .'</td>';
+        echo '</tr>';
+    }
+    ?>
+    </tbody>
+</table>

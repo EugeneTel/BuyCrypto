@@ -2,12 +2,6 @@ columns:
     id:
         label: ID
         type: text
-    name:
-        label: 'Parser currency name'
-        type: text
-    code:
-        label: 'Parser currency code'
-        type: text
-    crypto_currencies_id:
-        label: 'System currency code'
+    relation:
+        label: Relation
         type: text

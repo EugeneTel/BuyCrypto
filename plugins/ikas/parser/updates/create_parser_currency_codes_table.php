@@ -12,9 +12,9 @@ class CreateParserCurrencyCodesTable extends Migration
         Schema::create('ikas_parser_currency_codes', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 50)->unique();
-            $table->string('code', 20)->unique();
-            $table->integer('crypto_currencies_id')->references('id')->on('laradev_crypto_currencies')->nullable();
+            $table->string('buy_currency_id')->unique();
+            $table->string('out_id');
+            $table->string('resource');
         });
     }
 

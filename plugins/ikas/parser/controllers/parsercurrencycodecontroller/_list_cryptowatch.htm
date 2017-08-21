@@ -1,0 +1,20 @@
+<div class="field-checkboxlist-scrollable">
+    <div class="control-scrollbar drag-scrollbar vertical" data-control="scrollbar" data-disposable=""><div class="scrollbar-scrollbar" style="display: block;"><div class="scrollbar-track" style="height: 1875px;"><div class="scrollbar-thumb" style="height: 47.3621px; top: 0px;"></div></div></div>
+
+        <input type="hidden" name="cryptowatch" value="0">
+
+
+        <div class="checkbox custom-checkbox">
+            <input checked type="radio" id="cryptowatch-0" name="cryptowatch[]" value="0">
+            <label for="cryptowatch-0">None select</label>
+        </div>
+
+        <?php
+            foreach($this->vars["cryptowatch"]["currency"] as $id => $name){
+                echo '<div class="checkbox custom-checkbox">';
+                echo '<input type="radio" id="cryptowatch-'.$id.'" name="cryptowatch[]" value="'.$id.'">';
+                echo '<label for="cryptowatch-'.$id.'">['.$id.'] '.$name.'</label></div>';
+            }
+        ?>
+    </div>
+</div>
